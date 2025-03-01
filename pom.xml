@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>zo.co.georg</groupId>
+    <artifactId>ANTLR4-Java</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>ANTLR4-Java</name>
+    <description>ANTLR4 with Java implementation</description>
+
+    <!-- GitHub Repository -->
+    <url>https://github.com/GeorgNieuwoudt007/ANTLR4-Java.git</url>
+
+    <!-- Developers -->
+    <developers>
+        <developer>
+            <name>Georg Nieuwoudt</name>
+            <email>georg.nieu@gmail.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- ANTLR -->
+        <antlr.version>4.13.2</antlr.version>
+
+        <!-- Maven -->
+        <mojo.version>3.6.0</mojo.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <version>${antlr.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>${antlr.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>antlr4</goal>
+                        </goals>
+
+                        <phase>generate-sources</phase>
+
+                        <configuration>
+                            <!-- Base directory for the main grammar files -->
+                            <sourceDirectory>src/main/antlr4/main</sourceDirectory>
+                            <!-- Directory containing grammar imports -->
+                            <libDirectory>src/main/antlr4/main</libDirectory>
+                            <!-- Output directory for generated sources -->
+                            <outputDirectory>${project.basedir}/src/main/java/main</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${mojo.version}</version>
+
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
